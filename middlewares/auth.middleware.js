@@ -8,7 +8,6 @@ const authHandler = async (req, res, next) => {
             req.user = { userId: decoded.userId }
             return next();
           } catch (error) {
-              console.log("Error occured - middleware", error);
               res.status(401)
               .json({ 
                 success: false, 
