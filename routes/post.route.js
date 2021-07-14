@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authHandler } = require("../middlewares/auth.middleware.js")
 const { postImage } = require("../controllers/postImage.controller.js");
-const { getPosts } = require("../controllers/getPosts.controller.js");
+const { getPosts, deletePost } = require("../controllers/posts.controller.js");
 const { likePost, dislikePost } = require("../controllers/likeHandler.controller.js");
 const { postComment } = require("../controllers/commentHandler.controller.js");
 
@@ -21,5 +21,7 @@ router.route("/dislikePost")
 router.route("/postComment")
   .post(authHandler, postComment)
 
+router.route("/deletePost")
+  .post(authHandler, deletePost)
 
 module.exports = router;
