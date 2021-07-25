@@ -63,7 +63,7 @@ const getPosts = async (req, res) => {
 
         if (username) {
             try {
-                const findPosts = await Post.find({username: username});
+                const findPosts = await Post.find({username: username}).sort({createdAt: -1});
                 res.status(201).json({ 
                   success: true, 
                   message: "Posts found",
@@ -84,11 +84,13 @@ const getPosts = async (req, res) => {
 
 const searchUser = async (req, res) => {
       const { searchValue } = req.body
+
       try {
-        const searchData = await Profile.find({username: searchValue})
+        const users = await Profile.find({})
+        const searchResult = users.filter((user) => user.username.includes(searchValue) )
         res.json({ 
         success: true,  
-        searchData})  
+        searchResult})  
       }    
       catch (error) {
         res.status(500).json({ 
